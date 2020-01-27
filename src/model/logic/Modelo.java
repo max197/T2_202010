@@ -67,6 +67,10 @@ public class Modelo {
 	{
 		return datos.eliminar(dato);
 	}
+	public String darElemento(int i)
+	{
+		return datos.darElemento(i);
+	}
 
 
 }
