@@ -36,7 +36,7 @@ public class Stack<T> implements IStack<T>
 		}
 		else
 		{
-			tope.cambiarSiguiente(nuevoNodo);
+			nuevoNodo.cambiarSiguiente(tope);
 			tope = nuevoNodo;
 		}
 		tamanio++;
@@ -46,20 +46,18 @@ public class Stack<T> implements IStack<T>
 	 * Borrar un elemento. El elemento tope de la lista
 	 * @return Retorna el elemento. Retorna nulo si no hay elementos en la lista.
 	 */
-	public T pop ()
+	public T pop () throws Exception
 	{
-		if (tope != null)
-		{
-			Node<T> aEliminar = tope;
-			tope.cambiarSiguiente(null);
-			tope = aEliminar.darSiguiente();
+		if (tope == null)
+			throw new Exception("La pila esta vacia.");
 			
-			tamanio--;
-			
-			return aEliminar.getData();
-		}
 		
-		return null;
+		T elem = tope.getData();
+		Node<T> nextTop = tope.darSiguiente();
+		tope.cambiarSiguiente(null);
+		tope = nextTop;
+		tamanio--;
+		return elem;
 		
 	}
 	

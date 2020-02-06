@@ -54,19 +54,18 @@ public class Queue<T> implements IQueue<T>
 	 * Saca el elemento del principio, es decir, el primero
 	 * @return el elemento que elimino. Null si no habia nada.
 	 */
-	public T dequeue( )
+	public T dequeue( ) throws Exception
 	{
-		if (primero != null)
-		{
-			Node<T> aEliminar = primero;
-			primero.cambiarSiguiente(null);
-			primero = aEliminar.darSiguiente(); 
+		if (tamanio == 0)
+			throw new Exception("La cola no tiene objetos para sacar");
+		Node<T> viejoPrimero = primero;
+		T elem = viejoPrimero.getData();
+		primero = viejoPrimero.darSiguiente();
+		viejoPrimero.cambiarSiguiente(null);
+		tamanio--;
+		return elem;
 			
-			tamanio--;
-			
-			return aEliminar.getData();
-		}
-		return null;
+		
 	}
 	/**
 	 * Tamanio de la cola

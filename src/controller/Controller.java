@@ -2,7 +2,10 @@ package controller;
 
 import java.util.Scanner;
 
+import model.data_structures.IQueue;
+import model.data_structures.Queue;
 import model.logic.Modelo;
+import model.logic.Multa;
 import view.View;
 
 public class Controller {
@@ -51,23 +54,32 @@ public class Controller {
 				case 2:
 					view.printMessage("--------- \nHacer cluster por codigo de infraccion : ");
 					dato = lector.next();
+				try {
 					modelo.cluster();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 					view.printMessage("Dato agregado");
 					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
 				case 3:
-					view.printMessage("--------- \nImprimir la cola: ");
+					view.printMessage("--------- \nInserte los N comparendos: ");
+					int N = lector.nextInt();
+					view.printMessage("\nInserte el codigo de la infraccion:");
 					dato = lector.next();
-					//respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
+					try 
 					{
-						view.printMessage("Dato eliminado "+ respuesta);
-					}
-					else
+					IQueue<Multa> cola = (Queue<Multa>) modelo.countFine(N, dato);
+					view.printMessage("Numero actual de elementos: " + cola.size() + "\n---------");
+					view.printQueue(cola);
+					} 
+					catch (Exception e) 
 					{
-						view.printMessage("Dato NO eliminado");							
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 					}
-					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+											
 					break;
 				case 4: 
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 

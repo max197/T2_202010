@@ -1,6 +1,8 @@
 package view;
 
+import model.data_structures.IQueue;
 import model.logic.Modelo;
+import model.logic.Multa;
 
 public class View 
 {
@@ -28,9 +30,12 @@ public class View
 		}		
 		
 		
-		public void printModelo(Modelo modelo)
+		public void printQueue(IQueue<Multa> cola) throws Exception
 		{
-			// TODO implementar
+			while (!cola.isEmpty())
+			{
+				System.out.println(cola.dequeue().toString() + "\n");
+			}
 
 		}
 }
