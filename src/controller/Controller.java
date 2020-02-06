@@ -51,27 +51,11 @@ public class Controller {
 				case 2:
 					view.printMessage("--------- \nHacer cluster por codigo de infraccion : ");
 					dato = lector.next();
-					//modelo.agregar(dato);
+					modelo.cluster();
 					view.printMessage("Dato agregado");
 					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
-
 				case 3:
-					view.printMessage("--------- \nImprimir la pila ");
-					dato = lector.next();
-					//respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato encontrado: "+ respuesta);
-					}
-					else
-					{
-						view.printMessage("Dato NO encontrado");
-					}
-					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 4:
 					view.printMessage("--------- \nImprimir la cola: ");
 					dato = lector.next();
 					//respuesta = modelo.eliminar(dato);
@@ -85,7 +69,7 @@ public class Controller {
 					}
 					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
-				case 5: 
+				case 4: 
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;
