@@ -51,7 +51,12 @@ public class Controller {
 				case 2:
 					view.printMessage("--------- \nHacer cluster por codigo de infraccion : ");
 					dato = lector.next();
+					
+					
+					////////////
+					/*
 					modelo.cluster();
+					*/
 					view.printMessage("Dato agregado");
 					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
