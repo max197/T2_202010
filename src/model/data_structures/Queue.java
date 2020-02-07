@@ -94,11 +94,6 @@ public class Queue<T> implements IQueue<T>
 		return primero.getData();
 	}
 	
-	
-	
-	
-	
-	
 	/**
 	 * Metodo para utilizar en los test
 	 * @return T retorna el ultimo Nodo<T> de la queue

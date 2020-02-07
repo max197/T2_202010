@@ -116,7 +116,6 @@ public class Modelo
 				Multa multa = new Multa(objectID, fecha, medio_dete, clase_vehi, tipo_servi, infraccion,
 						des_infrac, localidad, latitud.get(j), longitud.get(j));
 				
-				
 				addStack(multa);
 				addQueue(multa);
 				
@@ -143,21 +142,41 @@ public class Modelo
 	}
 	
 	
+	
+	/**
+	 * Requerimiento 3: Contar los N comparendos de una infraccion dada.
+	 * Retorna la cola vacia si no hay nada en la pila.
+	 */
+	public IQueue<Multa> countFine (int N, String infraccion ) throws Exception
+	{
+		IQueue<Multa> nuevaCola = new Queue<Multa>();
+		int i = N;
+		while (i > 0 && !stack.isEmpty())
+		{
+			
+			Multa multaTope = stack.pop();
+			
+			if (multaTope.darInfraccion().equals(infraccion))
+			{
+				nuevaCola.enqueue(multaTope);
+				i--;
+			}
+		}
+		
+		return nuevaCola;
+	}
+	
+	
+	
+	
+	
 	/**
 	 * Requerimiento 2. 
 	 * Hacer un cluster con el grupo consecutivo que mas se repite de la cola
 	 * @return una nueva cola con los comparendos resultantes. Si no hay datos cargados, retorna null
 
 	 */
-<<<<<<< HEAD
-=======
-//<<<<<<< HEAD
-	//public IQueue<Multa> cluster() throws Exception
-//=======
-	/*
->>>>>>> 2b9358b9325897c648c572b28d8cb79e520b54de
 	public IQueue<Multa> cluster()
->>>>>>> 4a1659a0f7798aec33b284fc4e0d25e258e681bd
 	{
 		//Creo la cola
 		IQueue<Multa> nuevaCola = new Queue<Multa>();
@@ -184,7 +203,7 @@ public class Modelo
 				//Si no coinciden, saco TODAS las multa que estaba en la nueva lista y meto la nueva
 				else
 				{
-					
+					nuevaCola.emptyQueue();
 					nuevaCola.dequeue();
 					nuevaCola.enqueue(multa);
 				}
@@ -194,29 +213,6 @@ public class Modelo
 		return nuevaCola.isEmpty()? null: nuevaCola;
 	}
 	
-	
-	/**
-	 * Requerimiento 3: Contar los N comparendos de una infraccion dada.
-	 * Retorna la cola vacia si no hay nada en la pila.
-	 */
-	public IQueue<Multa> countFine (int N, String infraccion ) throws Exception
-	{
-		IQueue<Multa> nuevaCola = new Queue<Multa>();
-		int i = N;
-		while (i > 0 && !stack.isEmpty())
-		{
-			
-			Multa multaTope = stack.pop();
-			
-			if (multaTope.darInfraccion().equals(infraccion))
-			{
-				nuevaCola.enqueue(multaTope);
-				i--;
-			}
-		}
-		
-		return nuevaCola;
-	}
 	
 	/**
 	 * Servicio de consulta de numero de elementos presentes en la pila 
