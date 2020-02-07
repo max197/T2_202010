@@ -18,7 +18,7 @@ public class TestModelo {
 
 	public void setUp2() {
 		for(int i =0; i< CAPACIDAD;i++){
-			modelo.agregar(""+i);
+			modelo.agregar(i);
 		}
 	}
 
@@ -40,13 +40,13 @@ public class TestModelo {
 	{
 		// TODO Completar la prueba
 		setUp1();
-		modelo.agregar("Hola");
-		assertNotNull("Debio haber agregado un Hola y no lo hizo", modelo.buscar("Hola"));
+		modelo.agregar(120);
+		assertNotNull("Debio haber agregado un 120 y no lo hizo", modelo.buscar(120));
 		
 		for (int i = 0; i < CAPACIDAD; i++)
 		{
-			modelo.agregar(""+i);
-			assertNotNull("No esta agregando bien", modelo.buscar(""+i));
+			modelo.agregar(i);
+			assertNotNull("No esta agregando bien", modelo.buscar(i));
 		}
 		
 	}
@@ -58,7 +58,7 @@ public class TestModelo {
 		
 		for (int i = 0; i < CAPACIDAD; i++)
 		{
-			assertEquals("Se esperaba encontrar " + i + " y se encontro "+ modelo.buscar(""+i),""+i, modelo.buscar(""+i));
+			assertEquals("Se esperaba encontrar " + i + " y se encontro "+ modelo.buscar(i),(int)i, (int)modelo.buscar(i));
 		}
 	}
 
@@ -69,19 +69,19 @@ public class TestModelo {
 		// TODO Completar la prueba
 		//Caso en que quiera eliminar el primero.
 		
-		assertEquals(""+0, modelo.eliminar(""+0));
+		assertEquals((int)0, (int)modelo.eliminar(0));
 		
 		//Caso en el que quiera eliminar el ultimo
 		
-		assertEquals(""+ (CAPACIDAD-1), modelo.eliminar(""+ (CAPACIDAD-1)));
+		assertEquals((int)(CAPACIDAD-1), (int)modelo.eliminar((CAPACIDAD-1)));
 		
 		//Caso en el que quiera eliminar alguno en el medio. 
 		
-		assertEquals("" + (CAPACIDAD-10), modelo.eliminar("" + (CAPACIDAD-10)));
+		assertEquals((int)(CAPACIDAD-10), (int)modelo.eliminar((CAPACIDAD-10)));
 		
 		//Eliminar algo que no existe
 		
-		assertNull(modelo.eliminar("X"));
+		assertNull(modelo.eliminar(1000));
 		
 	}
 

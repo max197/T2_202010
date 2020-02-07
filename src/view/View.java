@@ -29,7 +29,11 @@ public class View
 			System.out.println(mensaje);
 		}		
 		
-		
+		/**
+		 * imprime la cola, pero la va borrando
+		 * @param cola borra la cola mientras la imprime
+		 * @throws Exception
+		 */
 		public void printQueue(IQueue<Multa> cola) throws Exception
 		{
 			while (!cola.isEmpty())

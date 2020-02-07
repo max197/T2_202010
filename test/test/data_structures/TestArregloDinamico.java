@@ -7,21 +7,21 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestArregloDinamico {
+public class TestArregloDinamico<T> {
 
-	private ArregloDinamico arreglo;
+	private ArregloDinamico<Integer> arreglo;
 	private static int TAMANO=100;
 	
 	@Before
 	public void setUp1() 
 	{
-		arreglo= new ArregloDinamico(TAMANO);
+		arreglo= new ArregloDinamico<Integer>(TAMANO);
 	}
 
 	public void setUp2() 
 	{
 		for(int i =0; i< TAMANO*2; i++){
-			arreglo.agregar(""+i);
+			arreglo.agregar(i);
 		}
 	}
 
@@ -41,7 +41,7 @@ public class TestArregloDinamico {
 		// TODO
 		for (int i = 0; i < TAMANO*2; i++)
 		{
-			assertEquals("El metodo de agregar o de dar elemento tienen un error", ""+i, arreglo.darElemento(i));
+			assertEquals("El metodo de agregar o de dar elemento tienen un error", (int)i, (int)arreglo.darElemento(i));
 		}
 	}
 
