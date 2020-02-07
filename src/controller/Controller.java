@@ -53,12 +53,11 @@ public class Controller {
 					dato = lector.next();
 					
 					
-					////////////
-					/*
+
 					modelo.cluster();
-					*/
+
 					view.printMessage("Dato agregado");
-					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
 				case 3:
 					view.printMessage("--------- \nImprimir la cola: ");

@@ -76,6 +76,9 @@ public class TestQueue {
 	@Test 
 	public void testSize()
 	{
+		
+		setUp1();
+		
 
 	}
 
