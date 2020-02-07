@@ -77,6 +77,7 @@ public class Stack<T> implements IStack<T>
 	{
 		return tope.getData();
 	}
+
 	
 	/**
 	 * Dar tamanio
@@ -88,5 +89,13 @@ public class Stack<T> implements IStack<T>
 	}
 
 	
+	/**
+	 * Metodo auxiliar para los tests
+	 * @return Node nodo que está en el tope
+	 */
+	public Node<T> darTope()
+	{
+		return tope;
+	}
 	
 }

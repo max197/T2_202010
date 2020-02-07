@@ -50,12 +50,16 @@ public class Controller {
 				view.printMessage(modelo.getQueue().getFirst().toString() + " \n");
 				view.printMessage("Numero actual de elementos " + modelo.stackSize() + "\n---------");						
 				break;
-
+/*
 			case 2:
 				view.printMessage("--------- \nHacer cluster por codigo de infraccion : ");
 				dato = lector.next();
 
-				try {
+				try 
+				{
+					
+					
+					
 					modelo.cluster();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -68,9 +72,9 @@ public class Controller {
 				modelo.cluster( );
 
 				view.printMessage("Dato agregado");
-				/*view.printMessage("Numero actual de elementos " + modelodarTamano() + "\n---------")					
-				break;*/
-
+				view.printMessage("Numero actual de elementos " + modelodarTamano() + "\n---------")					
+				break;
+*/
 
 			case 3:
 				view.printMessage("--------- \nInserte los N comparendos: ");

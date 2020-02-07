@@ -1,6 +1,6 @@
 package test.logic;
 
-
+/*
 import static org.junit.Assert.*;
 import model.logic.Modelo;
 
@@ -107,10 +107,10 @@ public class TestModelo {
 		//Eliminar algo que no existe
 
 		assertNull(modelo.eliminar("X"));
->>>>>>> 4a1659a0f7798aec33b284fc4e0d25e258e681bd
+
 
 	}
 }
-
+*/
 
 

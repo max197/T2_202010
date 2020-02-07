@@ -176,7 +176,7 @@ public class Modelo
 	 * @return una nueva cola con los comparendos resultantes. Si no hay datos cargados, retorna null
 
 	 */
-	public IQueue<Multa> cluster()
+	/*public IQueue<Multa> cluster()
 	{
 		//Creo la cola
 		IQueue<Multa> nuevaCola = new Queue<Multa>();
@@ -212,6 +212,7 @@ public class Modelo
 		
 		return nuevaCola.isEmpty()? null: nuevaCola;
 	}
+	*/
 	
 	
 	/**

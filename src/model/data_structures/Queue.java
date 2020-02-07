@@ -58,6 +58,7 @@ public class Queue<T> implements IQueue<T>
 	{
 		if (tamanio == 0)
 			throw new Exception("La cola no tiene objetos para sacar");
+		
 		Node<T> viejoPrimero = primero;
 		T elem = viejoPrimero.getData();
 		primero = viejoPrimero.darSiguiente();
@@ -96,11 +97,20 @@ public class Queue<T> implements IQueue<T>
 	
 	/**
 	 * Metodo para utilizar en los test
-	 * @return T retorna el ultimo Nodo<T> de la queue
+	 * @return ultimo Nodo<T> de la queue
 	 */
 	public Node<T> darUltimo()
 	{
 		return ultimo;
+	}
+	
+	/**
+	 * *Metodo para utilizar en los tests
+	 * @return primer Nodo<T> de la queue
+	 */
+	public Node<T> darPrimero()
+	{
+		return primero;
 	}
 	
 	
