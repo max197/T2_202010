@@ -11,7 +11,7 @@ public interface IStack<T>
 	/**
 	 * eliminar 
 	 */
-	public T pop();
+	public T pop() throws Exception;
 	
 	/**
 	 * Esta vacio

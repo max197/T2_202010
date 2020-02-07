@@ -5,7 +5,7 @@ public interface IQueue<T>
 	
 	public void enqueue( T dato );
 	
-	public T dequeue ();
+	public T dequeue () throws Exception;
 	
 	public int size();
 	
