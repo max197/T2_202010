@@ -54,12 +54,21 @@ public class Controller {
 				case 2:
 					view.printMessage("--------- \nHacer cluster por codigo de infraccion : ");
 					dato = lector.next();
+<<<<<<< HEAD
 				try {
 					modelo.cluster();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+=======
+					
+					
+					////////////
+					/*
+					modelo.cluster( );
+					*/
+>>>>>>> 4a1659a0f7798aec33b284fc4e0d25e258e681bd
 					view.printMessage("Dato agregado");
 					//view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;

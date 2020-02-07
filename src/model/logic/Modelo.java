@@ -27,9 +27,9 @@ public class Modelo
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IStack<Multa> stack;
+	private Stack<Multa> stack;
 	
-	private IQueue<Multa> queue;
+	private Queue<Multa> queue;
 	
 	
 	/**
@@ -53,7 +53,7 @@ public class Modelo
 		
 		try
 		{
-			Object obj = parser.parse(new FileReader("C:/Users/FREIDERMAN JARAMILLO/Documents/Talleres/T2_202010/data/comparendos_dei_2018_small.geojson"));
+			Object obj = parser.parse(new FileReader("./data/comparendos_dei_2018_small.geojson"));
 			JSONObject jsonObject = (JSONObject) obj;
 			
 			JSONArray featuresArray = (JSONArray) jsonObject.get("features");
@@ -147,8 +147,14 @@ public class Modelo
 	 * Requerimiento 2. 
 	 * Hacer un cluster con el grupo consecutivo que mas se repite de la cola
 	 * @return una nueva cola con los comparendos resultantes. Si no hay datos cargados, retorna null
+
 	 */
-	public IQueue<Multa> cluster() throws Exception
+//<<<<<<< HEAD
+	//public IQueue<Multa> cluster() throws Exception
+//=======
+	/*
+	public IQueue<Multa> cluster()
+>>>>>>> 4a1659a0f7798aec33b284fc4e0d25e258e681bd
 	{
 		//Creo la cola
 		IQueue<Multa> nuevaCola = new Queue<Multa>();
@@ -184,6 +190,8 @@ public class Modelo
 		
 		return nuevaCola.isEmpty()? null: nuevaCola;
 	}
+	
+	*/
 	
 	/**
 	 * Requerimiento 3: Contar los N comparendos de una infraccion dada.
@@ -248,7 +256,7 @@ public class Modelo
 	/**
 	 * dar toda la pila
 	 */
-	public IStack<Multa> getStack()
+	public Stack<Multa> getStack()
 	{
 		return stack;
 	}
@@ -256,7 +264,7 @@ public class Modelo
 	/**
 	 * Dar toda la cola
 	 */
-	public IQueue<Multa> getQueue()
+	public Queue<Multa> getQueue()
 	{
 		return queue;
 	}
