@@ -1,116 +1,103 @@
 package test.logic;
 
-/*
+import org.junit.Before;
+import org.junit.Test;
 import static org.junit.Assert.*;
 import model.logic.Modelo;
 
-import org.junit.Before;
-import org.junit.Test;
-
-public class TestModelo {
+public class TestModelo
+{
 
 	private Modelo modelo;
-	private static int CAPACIDAD=100;
 
 	@Before
-	public void setUp1() {
-		modelo= new Modelo(CAPACIDAD);
+	public void setUp1(){		
+		modelo = new Modelo();
 	}
 
-	public void setUp2() {
-		for(int i =0; i< CAPACIDAD;i++){
-			modelo.agregar(i);
-		}
+	@Before
+	public void setUp2()
+	{
+		modelo = new Modelo();
+		modelo.cargarDatos();
 	}
+
 
 	@Test
 	public void testModelo() {
 		assertTrue(modelo!=null);
-		assertEquals(0, modelo.darTamano());  // Modelo con 0 elementos presentes.
 	}
 
 	@Test
-	public void testDarTamano() {
-		// TODO
-		setUp2();
-		assertEquals("El tamanio deberia ser " + CAPACIDAD + " y es " + modelo.darTamano(), CAPACIDAD, modelo.darTamano());
-	}
-
-	@Test
-	public void testAgregar() 
+	public void testCargarDatos() 
 	{
-		// TODO Completar la prueba
+		assertTrue(modelo!=null);
+	}
+	
+	@Test
+	public void TestCluster()
+	{
+
 		setUp1();
-<<<<<<< HEAD
-		modelo.agregar(120);
-		assertNotNull("Debio haber agregado un 120 y no lo hizo", modelo.buscar(120));
-		
-=======
-		modelo.agregar("Hola");
-		assertNotNull("Debio haber agregado un Hola y no lo hizo", modelo.buscar("Hola"));
-
->>>>>>> 4a1659a0f7798aec33b284fc4e0d25e258e681bd
-		for (int i = 0; i < CAPACIDAD; i++)
+		try 
 		{
-			modelo.agregar(i);
-			assertNotNull("No esta agregando bien", modelo.buscar(i));
+			modelo.cluster();
+			fail("No debio haber entrado al try");
+		}
+		catch(Exception e)
+		{
+
+		}
+		
+		setUp2();
+		try{
+			assertTrue("La cola debería tener al menos un elemento", modelo.cluster().size()>=1);
+		}
+		catch(Exception e)
+		{
+			e.getMessage();
+			e.printStackTrace();
 		}
 
-	}
-
-	@Test
-	public void testBuscar() {
+		//Se genera de nuevo el escenario 2 porque el método cluster vacía la lista original. 
 		setUp2();
-		// TODO Completar la prueba
-
-		for (int i = 0; i < CAPACIDAD; i++)
+		try
 		{
-			assertEquals("Se esperaba encontrar " + i + " y se encontro "+ modelo.buscar(i),(int)i, (int)modelo.buscar(i));
+			assertFalse("La cola no debería tener más de 20 elementos", modelo.cluster().size()>20);
 		}
-	}
-
-	@Test
-	public void testEliminar() 
-	{
+		catch(Exception e){
+			e.getMessage();
+			e.printStackTrace();
+			
+		}
+		
+		//Verifica que no hayan codigos distintos en el cluster
 		setUp2();
-		// TODO Completar la prueba
-		//Caso en que quiera eliminar el primero.
-<<<<<<< HEAD
-		
-		assertEquals((int)0, (int)modelo.eliminar(0));
-		
-		//Caso en el que quiera eliminar el ultimo
-		
-		assertEquals((int)(CAPACIDAD-1), (int)modelo.eliminar((CAPACIDAD-1)));
-		
-		//Caso en el que quiera eliminar alguno en el medio. 
-		
-		assertEquals((int)(CAPACIDAD-10), (int)modelo.eliminar((CAPACIDAD-10)));
-		
-		//Eliminar algo que no existe
-		
-		assertNull(modelo.eliminar(1000));
-		
-	}
-=======
+		try
+		{
+			String otroCodigo = "";
+			String codigo=  modelo.cluster().dequeue().darInfraccion();
+			//While de la segunda multa en adelante
+			while(!modelo.cluster().isEmpty())
+			{
 
-		assertEquals(""+0, modelo.eliminar(""+0));
+				/*Basta con que una multa tenga un codigo distinto a la primera multa para darse cuenta que el cluster no se ejecutó
+				bien */
+				
+				otroCodigo = modelo.cluster().dequeue().darInfraccion();
+				assertTrue("Hay dos codigos distintos de infraccion", otroCodigo.equals(codigo));
+				
+			}
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage() + ". No pasó nada malo");
 
-		//Caso en el que quiera eliminar el ultimo
-
-		assertEquals(""+ (CAPACIDAD-1), modelo.eliminar(""+ (CAPACIDAD-1)));
-
-		//Caso en el que quiera eliminar alguno en el medio. 
-
-		assertEquals("" + (CAPACIDAD-10), modelo.eliminar("" + (CAPACIDAD-10)));
-
-		//Eliminar algo que no existe
-
-		assertNull(modelo.eliminar("X"));
-
+		}
 
 	}
 }
-*/
+
 
 

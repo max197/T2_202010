@@ -28,10 +28,10 @@ public class Modelo
 	 * Atributos del modelo del mundo
 	 */
 	private Stack<Multa> stack;
-	
+
 	private Queue<Multa> queue;
-	
-	
+
+
 	/**
 	 * Constructor del modelo del mundo. Crea la pila y la cola.
 	 */
@@ -40,8 +40,8 @@ public class Modelo
 		stack = new Stack<Multa>();
 		queue = new Queue<Multa>();
 	}
-	
-	
+
+
 	/**
 	 * Requerimiento 1. Cargar datos.
 	 * Carga los datos del archivo Json que esta contenido en el proyecto.
@@ -50,25 +50,25 @@ public class Modelo
 	{
 
 		JSONParser parser = new JSONParser();
-		
+
 		try
 		{
 			Object obj = parser.parse(new FileReader("./data/comparendos_dei_2018_small.geojson"));
 			JSONObject jsonObject = (JSONObject) obj;
-			
+
 			JSONArray featuresArray = (JSONArray) jsonObject.get("features");
 			Iterator iter = featuresArray.iterator();
-			
+
 			ArrayList<Double> latitud = new ArrayList<Double>();
 			ArrayList<Double> longitud = new ArrayList<Double>();
-			
+
 			int j = 0;
-			
+
 			while(iter.hasNext())
 			{
 				JSONObject objetoJson = (JSONObject) iter.next();
-				
-				
+
+
 				JSONObject properties = ( JSONObject ) objetoJson.get("properties");
 				long objectID = ( long ) properties.get("OBJECTID");
 				String localidad = ( String ) properties.get("LOCALIDAD");
@@ -78,15 +78,15 @@ public class Modelo
 				String clase_vehi = ( String ) properties.get("CLASE_VEHI");
 				String tipo_servi = ( String ) properties.get("TIPO_SERVI");
 				String infraccion = ( String ) properties.get("INFRACCION");
-	
-				
+
+
 				JSONObject geometry = ( JSONObject ) objetoJson.get("geometry");
 				JSONArray coordenadas = ( JSONArray ) geometry.get("coordinates");
 				Iterator iter2 = coordenadas.iterator();
-				
-				
+
+
 				int i = 0;
-				
+
 				while (iter2.hasNext())
 				{
 					Number lat_long = ( Number ) iter2.next();
@@ -111,15 +111,15 @@ public class Modelo
 						}
 					}
 				}
-				
+
 				//Crear la multa y el nodo para agregarlo a la lista. 
 				Multa multa = new Multa(objectID, fecha, medio_dete, clase_vehi, tipo_servi, infraccion,
 						des_infrac, localidad, latitud.get(j), longitud.get(j));
-				
+
 				addStack(multa);
 				addQueue(multa);
-				
-				
+
+
 				j++;
 			}
 		}
@@ -140,9 +140,7 @@ public class Modelo
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 	/**
 	 * Requerimiento 3: Contar los N comparendos de una infraccion dada.
 	 * Retorna la cola vacia si no hay nada en la pila.
@@ -153,68 +151,72 @@ public class Modelo
 		int i = N;
 		while (i > 0 && !stack.isEmpty())
 		{
-			
+
 			Multa multaTope = stack.pop();
-			
+
 			if (multaTope.darInfraccion().equals(infraccion))
 			{
 				nuevaCola.enqueue(multaTope);
 				i--;
 			}
 		}
-		
+
 		return nuevaCola;
 	}
-	
-	
-	
-	
-	
+
 	/**
 	 * Requerimiento 2. 
 	 * Hacer un cluster con el grupo consecutivo que mas se repite de la cola
-	 * @return una nueva cola con los comparendos resultantes. Si no hay datos cargados, retorna null
-
+	 * @return una nueva cola con los comparendos resultantes.
+	 * @return Exception si no hay datos cargados
 	 */
-	/*public IQueue<Multa> cluster()
+	public Queue<Multa> cluster() throws Exception
 	{
-		//Creo la cola
-		IQueue<Multa> nuevaCola = new Queue<Multa>();
-		// Mientras que la cola este llena, haga lo siguiente:
-		while (!queue.isEmpty())
+
+		/*String auxiliar que permite saber si se cambia de cluster. Por defecto la infracción anterior se inicializa 
+		con  la primera multa en la cola*/
+		if(queue.isEmpty())
+			throw new Exception("La cola no tiene elementos cargados");
+						
+		String infraccionAnterior =  queue.darPrimero().getData().darInfraccion();
+		
+		//El queue que retornará el método
+		Queue<Multa> cola =  new Queue<Multa>();
+		
+		//Queues auxiliares
+		Queue<Multa> c1 = new Queue<Multa>();
+
+		Queue<Multa> c2 = new Queue<Multa>();
+
+		while(!queue.isEmpty())
 		{
-			//quite el primer objeto de la lista y guardelo en multa
-			Multa multa = queue.dequeue();
-			//Meto ese objeto en la nueva lista.
-			//Si la nueva cola esta vacia, lo inserto
-			if (nuevaCola.isEmpty())
+			//Variable que identifica la multa eliminada del queue
+			Multa m = queue.dequeue();
+
+			String infraccionActual = m.darInfraccion();
+
+			if(infraccionActual.equals(infraccionAnterior))
 			{
-				nuevaCola.enqueue(multa);
+				c1.enqueue(m);
+				c2 = c1;
+
+				infraccionAnterior =  infraccionActual;
 			}
-			//Si la nueva cola no esta vacia, reviso si la infraccion es igual para la nueva multa y para 
-			//las que ya estan adentro. 
 			else
 			{
-				//Si coinciden meto la multa
-				if (nuevaCola.getFirst().darInfraccion().equals(multa.darInfraccion()))
-				{
-					nuevaCola.enqueue(multa);
-				}
-				//Si no coinciden, saco TODAS las multa que estaba en la nueva lista y meto la nueva
-				else
-				{
-					nuevaCola.emptyQueue();
-					nuevaCola.dequeue();
-					nuevaCola.enqueue(multa);
-				}
+				if(c2.size()>= cola.size())
+					cola = c2;
+
+				c1 = new Queue<Multa>();
+				c1.enqueue(m);
+				infraccionAnterior =  infraccionActual;
 			}
 		}
-		
-		return nuevaCola.isEmpty()? null: nuevaCola;
+
+		return cola;
+
 	}
-	*/
-	
-	
+
 	/**
 	 * Servicio de consulta de numero de elementos presentes en la pila 
 	 * @return numero de elementos presentes en la pila
@@ -223,7 +225,7 @@ public class Modelo
 	{
 		return stack.size();
 	}
-	
+
 	/**
 	 * Servicio de consulta de numero de elementos presentes en la cola
 	 * @return numero de elementos presentes en la cola
@@ -242,7 +244,7 @@ public class Modelo
 	{	
 		stack.push(dato);
 	}
-	
+
 	/**
 	 * Agregar los datos a la cola
 	 * @param dato
@@ -251,7 +253,7 @@ public class Modelo
 	{	
 		queue.enqueue(dato);
 	}
-	
+
 	/**
 	 * dar toda la pila
 	 */
@@ -259,7 +261,7 @@ public class Modelo
 	{
 		return stack;
 	}
-	
+
 	/**
 	 * Dar toda la cola
 	 */
