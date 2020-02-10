@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.data_structures.IStack;
 import model.data_structures.Queue;
 import model.data_structures.Stack;
 import model.logic.Modelo;
@@ -17,7 +18,7 @@ public class TestStack
 {
 
 
-	private Stack<Multa> pila;
+	private IStack<Multa> pila;
 	private Modelo modelo;
 
 
@@ -100,6 +101,7 @@ public class TestStack
 		{
 			Multa m =  pila.pop();
 			assertTrue(m.darID()==aSacar.darID());
+			assertEquals("No es el tamaño esperado",19, pila.size());
 
 		}
 		catch(Exception e)
@@ -129,6 +131,7 @@ public class TestStack
 			}
 			catch(Exception e)
 			{
+				assertEquals("Deberia tener tamaño cero",0, pila.size());
 				System.out.println("Entró al catch del testDePop");
 			}
 		}
@@ -143,7 +146,7 @@ public class TestStack
 		setUp2();
 		assertTrue(pila.isEmpty());
 
-		
+
 		//Verifica que la lista quede vacía cuando se eliminan todos los elementos
 		setUp1();
 		while(!pila.isEmpty())
@@ -171,17 +174,21 @@ public class TestStack
 		setUp2();
 		/*Se usa el metodo darTope() porque con getTop se lanza un NullPointerException*/
 		assertNull(pila.darTope());
+		
 
 
 		setUp1();
 		Multa esta = pila.getTop();
+		
+		
 		pila.darTope();
 		//Rectifica que el tamaño de la cola siga igual 
 		assertEquals("Se eliminó cuando no se debería eliminar", 20, pila.size());
+		
 		/*Rectifica que el elemento consultado por getTop() es el mismo que señala el nodo del tope de la pila.
 		 Como el ID es único, basta comparando el id*/
 		assertEquals("Se eliminó cuando no debió eliminarse", pila.darTope().getData().darID(), esta.darID());
-		
+
 
 	}
 

@@ -27,4 +27,12 @@ public interface IStack<T>
 	 * Dar tamanio
 	 */
 	public int size();	
-}
+	
+	
+	/**
+	 * Retorna el nodo tope
+	 */
+	public Node<T> darTope();
+}	
+
+

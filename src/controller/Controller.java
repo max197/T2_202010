@@ -56,11 +56,11 @@ public class Controller {
 				try{
 					
 					Queue<Multa> cola = modelo.cluster();
-					view.printMessage("Numero de comparendos del grupo resultado " + cola.size());
+					view.printMessage("Numero de comparendos del grupo resultado " + cola.size() + "\n");
 					while(!cola.isEmpty())
 					{		
 						Multa m = cola.dequeue();
-						view.printMessage("Codigo Infracción: " + m.darInfraccion()+ "ID :" + m.darID()+ " Fecha: " + m.darFecha() + " Clase vehículo: "+m.darClaseVehiculo() + " Tipo servicio: " + m.darTipoServicio() + " Localidad: "+ m.darLocalidad());
+						view.printMessage(m.toString() + "\n");
 								
 					}
 									

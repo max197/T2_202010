@@ -6,13 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertNull;
 
+import model.data_structures.IQueue;
 import model.data_structures.Queue;
 import model.logic.Modelo;
 import model.logic.Multa;
 
 public class TestQueue {
 
-	private Queue<Multa> cola;
+	private IQueue<Multa> cola;
 	private Modelo modelo;
 
 	/**

@@ -13,4 +13,8 @@ public interface IQueue<T>
 	
 	public T getFirst();
 
+	public Node<T> darUltimo();
+	
+	public Node<T> darPrimero();
+	
 }
